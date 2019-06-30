@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser');
 
 const Chat = require('./chatdb');
 const Users = require('./usersdb');
-let repost=null; /*Переменная для текста repost*/
 
 const app = express();
 app.use(bodyParser());
@@ -13,6 +12,7 @@ app.use(express.static('client'));
 
 const chat = new Chat('db.db');
 const users = new Users();
+let onlineUsers = [];
 
 app.get('/', (req, res) => {
     const user = users.getCurrent(req, (user) => {
@@ -33,10 +33,12 @@ app.post('/users', (req, res) => {
             if (password !== user[0].password) {
                 res.sendStatus(403);
             } else {
+                onlineUsers.push(name);
                 res.cookie('sid', user[0].sid);
                 res.redirect('/');
             }
         } else {
+            onlineUsers.push(name);
             users.add(name, password).then((user) => {
                 res.cookie('sid', user.sid);
                 res.redirect('/');
@@ -45,6 +47,7 @@ app.post('/users', (req, res) => {
             });
         }
     });
+
 });
 
 app.get('/messages', (req, res) => {
@@ -64,49 +67,32 @@ app.post('/messages', (req, res) => {
         if (!user.length) {
             res.sendStatus(403);
         } else {
-            chat.add(user[0].name, req.body.text, repost);
-            chat.getAll(user[0].name, (data) => {
-                res.json(data);
-            });
-        }
-    });
-
-});
-
-app.get('/messages/:id', (req, res) => {
-    users.getCurrent(req, (user) => {
-        if (!user.length) {
-            res.sendStatus(403);
-        } else {
-            const messageId = req.params.id;
-            // select message from DB
-            chat.get(messageId, message => res.json(message));
-        }
-    });
-});
-
-app.post('/change', (req, res) => {
-    users.getCurrent(req, (user) => {
-        if (!user.length) {
-            res.sendStatus(403);
-        } else {
-            chat.put(req.body.messageId, req.body.text, (callback) => {
-            });
+            chat.add(user[0].name, req.body.text);
             chat.getAll(user[0].name, (data) => {
                 res.json(data);
             });
         }
     });
 });
-
 
 app.get('/logout', (req, res) => {
     res.cookie('sid', null);
     res.redirect('/');
 });
 
-app.post('/repost', (req, res) => {
-    repost = req.body;
+app.post('/logout', (req, res) => {
+    onlineUsers.pop();
+    res.json(onlineUsers);
+    console.log(onlineUsers);
 });
 
+
+app.post('/repost', (req, res) => {
+    const message = req.body.message;
+    console.log(message);
+});
+
+app.post('/onlineUsers', (req, res) => {
+    res.json(onlineUsers);
+});
 app.listen(3000);

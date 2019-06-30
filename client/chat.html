@@ -2,28 +2,29 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="chat.css" />
+    <link rel="stylesheet" type="text/css" href="chat.css"/>
+    <script src="chat.js"></script>
 </head>
 
 <body>
-    <div class="buttonContainer">
-        <a href="/logout" id="buttonClose">X</a>
-    </div>
-    <div id="chat">
-        <!-- <div class="entry">
-            <div class="author">Author</div>
-            <div class="time">10:30 AM</div>
-            <div class="message">test message :)</div>
-        </div> -->
-    </div>
-    <footer>
-        <div class="repostContainer"></div>
-        <select id='smile' class='smile' multiple="multiple" onclick="sendToInput( this.value)"></select>
-        <input id="text" type="text" placeholder="Введите сообщение"/>
-        <button id="send" onclick="sendButtonClick()">&#9658;</button>
-    </footer>
-<!--    <script src="buttonOnClick.js"></script>-->
-    <script src="chat.js"></script>
+<div class="buttonContainer">
+    <a href="/logout" id="buttonClose" onclick="doLogout()">X</a>
+</div>
+<span id="online-users">Пользователи:</span>
+
+
+<div id="chat">
+    <!-- <div class="entry">
+        <div class="author">Author</div>
+        <div class="time">10:30 AM</div>
+        <div class="message">test message :)</div>
+    </div> -->
+</div>
+<footer>
+    <input id="text" type="text" placeholder="Введите сообщение"/>
+    <button id="send" onclick="sendButtonClick()">&#9658;</button>
+</footer>
+<script src="buttonOnClick.js"></script>
 </body>
 
 </html>
