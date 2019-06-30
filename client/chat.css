@@ -96,8 +96,8 @@ footer {
     cursor: alias;
 }
 
-.repost{
-    font-size: 15px;
-    margin-bottom: 10px;
-    color: orangered;
+#online-users{
+    color:white;
+    padding-left: 20px;
+    padding-bottom:10px;
 }

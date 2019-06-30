@@ -3,27 +3,15 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="login.css" />
-    <link rel="stylesheet" type="text/css" href="particles/particles.css" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 
 <body>
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-    AOS.init();
-</script>
-
- <div id="particles-js"></div>
- <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script src ='particles/particles.js'></script>
-    <img data-aos="fade-up" data-aos-duration="3000" src="res/logo.png">
     <form action="users" method="POST">
-<!--        <label data-aos="fade-up" data-aos-duration="3000" data-aos-delay="300" for="user">Имя</label>-->
-        <input data-aos="fade-up" data-aos-duration="3000" data-aos-delay="300" name="user"  id = "user" type="text" placeholder="Имя"/>
-<!--        <label data-aos="fade-up" data-aos-duration="3000" data-aos-delay="600" for="password">Пароль</label>-->
-        <input data-aos="fade-up" data-aos-duration="3000" data-aos-delay="600" name="password" id ="password" type="password" placeholder="Пароль"/>
-        <button data-aos="fade-up" data-aos-duration="3000" data-aos-delay="900" type="submit">Войти</button>
+        <label for="user">Имя</label>
+        <input name="user" type="text" />
+        <label for="password">Пароль</label>
+        <input name="password" type="password" />
+        <button type="submit">Войти</button>
     </form>
 </body>
 

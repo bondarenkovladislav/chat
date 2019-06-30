@@ -13,32 +13,16 @@ class ChatDB extends Chat {
      * @param {string} author
      * @param {string} text
      */
-    add(author, text, repost) {
-        if (!repost) {
-            this.db.forTable('Messages').insert({
-                author,
-                text,
-                time: Date.now(),
-                repostText: '',
-                repostAuthor: ''
-            }, (id) => {
-                if (!id) {
-                    console.log('error insert message');
-                }
-            });
-        } else {
-            this.db.forTable('Messages').insert({
-                author,
-                text,
-                time: Date.now(),
-                repostText: repost.message.text,
-                repostAuthor: repost.message.author
-            }, (id) => {
-                if (!id) {
-                    console.log('error insert message');
-                }
-            });
-        }
+    add(author, text) {
+       this.db.forTable('Messages').insert({
+          author,
+          text,
+          time: Date.now()
+       }, (id) => {
+          if (!id) {
+             console.log('error insert message');
+          }
+       });
     }
 
     /**
@@ -53,30 +37,12 @@ class ChatDB extends Chat {
              callback([]);
              return;
           }
-
           const data = messages.map(message => ({
              ...message,
              isMine: message.author === currentUserName
           }));
           callback(data);
        }, limit)
-    }
-    get(messageId, callback) {
-        this.db.forTable('Messages')
-            .filter({id: messageId})
-            .select((messages) => {
-                if (!messages) {
-                    callback([]);
-                    return;
-                }
-                callback(messages[0]);
-            })
-    }
-
-    put(messageId, textM, callback) {
-        this.db.forTable('Messages')
-            .filter({id: messageId})
-            .update([textM, messageId], callback);
     }
 }
 

@@ -11,8 +11,7 @@ class DB {
         this._filter = null;
         if (!fs.existsSync(dbFileName)) {
             this.db = new sqlite.Database(dbFileName);
-            this.db.run('CREATE TABLE IF NOT EXISTS Messages (id INTEGER PRIMARY KEY AUTOINCREMENT, author TEXT, text TEXT, time real, repostText TEXT,' +
-                'repostAuthor TEXT);');
+            this.db.run('CREATE TABLE IF NOT EXISTS Messages (id INTEGER PRIMARY KEY AUTOINCREMENT, author TEXT, text TEXT, time real);');
             this.db.run('CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, password TEXT, sid real);');
         } else {
             this.db = new sqlite.Database(dbFileName);
@@ -58,7 +57,7 @@ class DB {
         });
         const q = `INSERT INTO ${this._table}(${paramKeys.join(', ')}) VALUES (${templates.join(',')});`;
         this.db.run(q, values, function (err) {
-            if (err) {  /*TODO bug fix*/
+            if (err) {
                 console.log(err);
                 callback(false);
                 return;
@@ -101,24 +100,6 @@ class DB {
 
         this._table = null;
         this._filter = null;
-    }
-    // переписать в случае, если понадобится обновлять другие поля
-    update(values, callback) {
-        if (!this._table) {
-            callback(false);
-            return;
-        }
-        const q = `UPDATE Messages SET text= '${values[0]}' WHERE id= '${values[1]}'`;
-        this.db.run(q, function (err) {
-            if (err) {
-                console.log(err);
-                callback(false);
-                return;
-            }
-            callback(this.lastID);
-        });
-
-        this._table = null;
     }
 }
 
