@@ -36,7 +36,7 @@ button {
     margin-top:0;
 }
 
-button:hover {            
+button:hover {
     text-shadow: darkgray;
     box-shadow: 4px 4px 4px #333;
 }

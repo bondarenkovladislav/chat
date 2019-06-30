@@ -119,6 +119,10 @@ function createEntry(message) {
     });
     link.text = 'Ответ';
     console.log(message);
+    let aContainer = document.createElement('div');
+    aContainer.className = 'aContainer';
+    aContainer.appendChild(link);
+    aContainer.appendChild(btn(message.id,message.isMine));
 
 
     if(message.repostText!=='')
@@ -131,8 +135,7 @@ function createEntry(message) {
                     div('time', new Date(message.time).toLocaleTimeString())
                 ]),
                 div('message', message.text),
-                link,
-                btn(message.id,message.isMine)
+                aContainer
             ]);
     else
         return div(
@@ -143,8 +146,7 @@ function createEntry(message) {
                     div('time', new Date(message.time).toLocaleTimeString())
                 ]),
                 div('message', message.text),
-                link,
-                btn(message.id,message.isMine)
+                aContainer
             ]);
 }
 
@@ -232,7 +234,7 @@ function sendToInput(selected_value)
     const text=document.getElementById('text');
 
     text.value =text.value + selected_value;
-
+    text.focus();
 }
 
 function DoSelect(){
