@@ -1,0 +1,103 @@
+@import 'style.css';
+
+body {
+    flex-direction: column;
+}
+
+#chat {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.entry {
+    display:flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 4px 4px 4px #333;
+    margin: 20px 40px 0 20px;
+}
+
+.author {
+    font-weight: bold;
+    border-bottom: 1px solid grey;
+    min-height: 40px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mine {
+    background: lightblue;
+    margin-left: 40px;
+    margin-right: 20px;
+}
+
+.mine .author {
+    flex-direction: row-reverse;
+}
+
+.time {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: normal;
+}
+
+footer {
+    height: 40px;
+    display: flex;
+    padding: 20px;
+}
+
+#text {
+    flex-grow: 1;
+}
+
+#send {
+    margin-left: 20px;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: flex-end;
+}
+#buttonClose{
+    text-decoration: none;
+    color:white;
+    background-color: orange;
+    width:30px;
+    height:30px;
+    margin-top:10px;
+    margin-right:10px;
+    text-align: center;
+    border:2px solid orangered;
+    border-radius: 10px;
+}
+.repostLink
+{
+   
+    text-decoration: none;
+    color:white;
+    background-color: orange;
+    width:40px;
+    padding-bottom: 25px;
+    padding-right: 10px;
+    padding-top: 5px;
+    height:0px;
+    margin-top:5px;
+    margin-right:5px;
+    font-size: 15px;
+    border:2px solid orangered;
+    border-radius: 10px;
+    text-align: center;
+}
+.repostLink:hover{
+    box-shadow: 4px 4px 4px #333;
+    cursor: alias;
+}
+
+.repost{
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: orangered;
+}

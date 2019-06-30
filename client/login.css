@@ -1,0 +1,30 @@
+@import 'style.css';
+
+body {
+    align-items: center;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    flex-direction: column;
+}
+
+form {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    justify-content: space-between;
+}
+
+button[type=submit] {
+    margin-top: 0;
+}
+img{
+    width: 500px;
+    height: 600px;
+    margin-bottom: 10px;
+}
+
+#particles-js{
+    position: absolute;
+    z-index: -1;
+}
