@@ -13,6 +13,7 @@ app.use(express.static('client'));
 
 const chat = new Chat('db.db');
 const users = new Users();
+let onlineUsers = [];
 
 app.get('/', (req, res) => {
     const user = users.getCurrent(req, (user) => {
@@ -33,10 +34,12 @@ app.post('/users', (req, res) => {
             if (password !== user[0].password) {
                 res.sendStatus(403);
             } else {
+                onlineUsers.push(name);
                 res.cookie('sid', user[0].sid);
                 res.redirect('/');
             }
         } else {
+            onlineUsers.push(name);
             users.add(name, password).then((user) => {
                 res.cookie('sid', user.sid);
                 res.redirect('/');
@@ -104,9 +107,18 @@ app.get('/logout', (req, res) => {
     res.cookie('sid', null);
     res.redirect('/');
 });
+app.post('/logout', (req, res) => {
+    onlineUsers.pop();
+    res.json(onlineUsers);
+    console.log(onlineUsers);
+});
 
 app.post('/repost', (req, res) => {
     repost = req.body;
+});
+
+app.post('/onlineUsers', (req, res) => {
+    res.json(onlineUsers);
 });
 
 app.listen(3000);

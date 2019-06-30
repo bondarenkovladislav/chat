@@ -249,5 +249,41 @@ function DoSelect(){
 }
 DoSelect();
 
+function updateOnlineUsers() {
+    return fetch('/onlineUsers', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            text
+        })
+    })
+        .then(response => response.json())
+        .then(renderOnline)
+        .catch(showError);
+}
+function renderOnline(users) {
+    const onlineUsers = document.getElementById('online-users');
+    onlineUsers.innerText = 'Пользователи:' + users.length;
+}
+const onlineUsers = document.getElementById('online-users');
+
 updateChat();
+function doLogout() {
+    return fetch('/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            text
+        })
+    })
+        .then(response => response.json())
+        .then(renderOnline)
+        .catch(showError);
+}
 const updateInterval = setInterval(updateChat, 2000);
+const updateIntervalUsers = setInterval(updateOnlineUsers, 2000);
+
