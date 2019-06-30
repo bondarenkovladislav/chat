@@ -225,5 +225,29 @@ input.addEventListener('keypress',x=>{
     }
 });
 
+function sendToInput(selected_value)
+{
+
+    console.log(selected_value);
+    const text=document.getElementById('text');
+
+    text.value =text.value + selected_value;
+
+}
+
+function DoSelect(){
+    document.addEventListener('DOMContentLoaded', () => {
+        var option = ['&#x263B;', '&#9748;','&#128156;','&#128520;',' &#128552;','&#128557;','&#128545;','&#128529;','&#129300;','&#129412;',
+            '&#128640;','&#128161;','&#128253;','&#129411;','&#129296;','&#128511;','&#9855;'];
+        var select = '';
+        for(var i=0;i<option.length; i++){
+            select = select + '<option value="'+option[i]+'" class="images" >'+option[i]+'</option>';
+        }
+        document.getElementById('smile').innerHTML = select;
+    });
+
+}
+DoSelect();
+
 updateChat();
 const updateInterval = setInterval(updateChat, 2000);
